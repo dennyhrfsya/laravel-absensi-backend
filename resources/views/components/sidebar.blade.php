@@ -15,5 +15,9 @@
                 <a href="{{ route('users.index') }}"
                     class="nav-link"><i class="fas fa-user"></i> <span>Users</span></a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('companies.show', 1) }}"
+                    class="nav-link"><i class="fas fa-building"></i> <span>Company</span></a>
+            </li>
     </aside>
 </div>

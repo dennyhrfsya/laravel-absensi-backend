@@ -1,305 +1,262 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: localhost
--- Generation Time: Jul 13, 2025 at 01:04 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+/*
+ Navicat Premium Data Transfer
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+ Source Server         : Server xampp
+ Source Server Type    : MySQL
+ Source Server Version : 100432 (10.4.32-MariaDB)
+ Source Host           : localhost:3306
+ Source Schema         : absensi-app-db
 
+ Target Server Type    : MySQL
+ Target Server Version : 100432 (10.4.32-MariaDB)
+ File Encoding         : 65001
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+ Date: 18/07/2025 13:53:45
+*/
 
---
--- Database: `absensi-app-db`
---
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
 
--- --------------------------------------------------------
+-- ----------------------------
+-- Table structure for cache
+-- ----------------------------
+DROP TABLE IF EXISTS `cache`;
+CREATE TABLE `cache`  (
+  `key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expiration` int NOT NULL,
+  PRIMARY KEY (`key`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
---
--- Table structure for table `cache`
---
+-- ----------------------------
+-- Records of cache
+-- ----------------------------
+INSERT INTO `cache` VALUES ('laravel_cache_b3fb5cbf8bfd3f36444cd0090189189a', 'i:1;', 1752736110);
+INSERT INTO `cache` VALUES ('laravel_cache_b3fb5cbf8bfd3f36444cd0090189189a:timer', 'i:1752736110;', 1752736110);
 
-CREATE TABLE `cache` (
-  `key` varchar(255) NOT NULL,
-  `value` mediumtext NOT NULL,
-  `expiration` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+-- ----------------------------
+-- Table structure for cache_locks
+-- ----------------------------
+DROP TABLE IF EXISTS `cache_locks`;
+CREATE TABLE `cache_locks`  (
+  `key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `owner` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expiration` int NOT NULL,
+  PRIMARY KEY (`key`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `cache`
---
+-- ----------------------------
+-- Records of cache_locks
+-- ----------------------------
 
-INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('laravel_cache_a4e0c4ec138d7a25f8098ba9b44dccc1', 'i:1;', 1752339401),
-('laravel_cache_a4e0c4ec138d7a25f8098ba9b44dccc1:timer', 'i:1752339401;', 1752339401),
-('laravel_cache_b3fb5cbf8bfd3f36444cd0090189189a', 'i:1;', 1752403240),
-('laravel_cache_b3fb5cbf8bfd3f36444cd0090189189a:timer', 'i:1752403240;', 1752403240),
-('laravel_cache_dennyherfansya@gmail.com|127.0.0.1', 'i:1;', 1752339401),
-('laravel_cache_dennyherfansya@gmail.com|127.0.0.1:timer', 'i:1752339401;', 1752339401),
-('laravel_cache_ee2d05911a11e6a6b276f9e5d6fa54f1', 'i:1;', 1752403230),
-('laravel_cache_ee2d05911a11e6a6b276f9e5d6fa54f1:timer', 'i:1752403230;', 1752403230);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `cache_locks`
---
-
-CREATE TABLE `cache_locks` (
-  `key` varchar(255) NOT NULL,
-  `owner` varchar(255) NOT NULL,
-  `expiration` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `failed_jobs`
---
-
-CREATE TABLE `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) NOT NULL,
-  `connection` text NOT NULL,
-  `queue` text NOT NULL,
-  `payload` longtext NOT NULL,
-  `exception` longtext NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `jobs`
---
-
-CREATE TABLE `jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `queue` varchar(255) NOT NULL,
-  `payload` longtext NOT NULL,
-  `attempts` tinyint(3) UNSIGNED NOT NULL,
-  `reserved_at` int(10) UNSIGNED DEFAULT NULL,
-  `available_at` int(10) UNSIGNED NOT NULL,
-  `created_at` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `job_batches`
---
-
-CREATE TABLE `job_batches` (
-  `id` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `total_jobs` int(11) NOT NULL,
-  `pending_jobs` int(11) NOT NULL,
-  `failed_jobs` int(11) NOT NULL,
-  `failed_job_ids` longtext NOT NULL,
-  `options` mediumtext DEFAULT NULL,
-  `cancelled_at` int(11) DEFAULT NULL,
-  `created_at` int(11) NOT NULL,
-  `finished_at` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `migrations`
---
-
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '0001_01_01_000000_create_users_table', 1),
-(2, '0001_01_01_000001_create_cache_table', 1),
-(3, '0001_01_01_000002_create_jobs_table', 1),
-(4, '2025_07_12_155849_add_two_factor_columns_to_users_table', 1),
-(5, '2025_07_12_161300_add_phone_role_at_users', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `password_reset_tokens`
---
-
-CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) NOT NULL,
-  `token` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `sessions`
---
-
-CREATE TABLE `sessions` (
-  `id` varchar(255) NOT NULL,
-  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `ip_address` varchar(45) DEFAULT NULL,
-  `user_agent` text DEFAULT NULL,
-  `payload` longtext NOT NULL,
-  `last_activity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `sessions`
---
-
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('EYFcnDOlx2ZX96JW0eIeSwolE2AwBwDn2iMIKZpX', NULL, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicDlSWnAya3NTd2JtcTUzcnJiOEJXWW9IT1RZbnl4bEQxYTRRMlZWRCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fX0=', 1752404308),
-('yePzs9GZibEda6TPhsvcF70JaYiROa8qDKpoO8OW', 11, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoieEExbW5KeHN2U2JEOE5UZ1A4N1JEaG9ydlRkazlkd1R0YVhWWG5KbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9ob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTE7fQ==', 1752339413);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `two_factor_secret` text DEFAULT NULL,
-  `two_factor_recovery_codes` text DEFAULT NULL,
-  `two_factor_confirmed_at` timestamp NULL DEFAULT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
+-- ----------------------------
+-- Table structure for companies
+-- ----------------------------
+DROP TABLE IF EXISTS `companies`;
+CREATE TABLE `companies`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `latitude` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `longitude` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `radius_km` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `time_in` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `time_out` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `phone` varchar(255) DEFAULT NULL,
-  `role` varchar(255) NOT NULL DEFAULT 'user'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
---
--- Dumping data for table `users`
---
+-- ----------------------------
+-- Records of companies
+-- ----------------------------
+INSERT INTO `companies` VALUES (1, 'PT. Global Sekuriti Indonesia', 'admin@globalsekuritiindonesia.co.id', 'Gedung Graha Anugerah Lt.6, Jl. Teluk Betung No.42', '-6.1963516', '106.8213377', '0.5', '08:00', '17:00', '2025-07-17 06:41:09', '2025-07-17 06:41:09');
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `created_at`, `updated_at`, `phone`, `role`) VALUES
-(1, 'Idella Crooks', 'hodkiewicz.guido@example.com', '2025-07-12 09:34:08', '$2y$12$hK3fEezZOk4wNftJ.IjrWudnPNLYmM03gz4yBqbk11EEubHOaMZ2i', NULL, NULL, NULL, 'yHzW7CSy22', '2025-07-12 09:34:08', '2025-07-12 09:34:08', NULL, 'user'),
-(2, 'John DuBuque Jr.', 'raegan.stroman@example.org', '2025-07-12 09:34:08', '$2y$12$hK3fEezZOk4wNftJ.IjrWudnPNLYmM03gz4yBqbk11EEubHOaMZ2i', NULL, NULL, NULL, 'I8HW14rWDh', '2025-07-12 09:34:08', '2025-07-12 09:34:08', NULL, 'user'),
-(3, 'Jermain Stokes', 'eondricka@example.net', '2025-07-12 09:34:08', '$2y$12$hK3fEezZOk4wNftJ.IjrWudnPNLYmM03gz4yBqbk11EEubHOaMZ2i', NULL, NULL, NULL, 'pKqd4HwVfj', '2025-07-12 09:34:08', '2025-07-12 09:34:08', NULL, 'user'),
-(4, 'Eusebio Breitenberg', 'legros.elvera@example.org', '2025-07-12 09:34:08', '$2y$12$hK3fEezZOk4wNftJ.IjrWudnPNLYmM03gz4yBqbk11EEubHOaMZ2i', NULL, NULL, NULL, 'x6RzXDk2lX', '2025-07-12 09:34:08', '2025-07-12 09:34:08', NULL, 'user'),
-(5, 'Jules Greenfelder Jr.', 'beatty.eugene@example.com', '2025-07-12 09:34:08', '$2y$12$hK3fEezZOk4wNftJ.IjrWudnPNLYmM03gz4yBqbk11EEubHOaMZ2i', NULL, NULL, NULL, 'qxOjAIBJtJ', '2025-07-12 09:34:08', '2025-07-12 09:34:08', NULL, 'user'),
-(6, 'Hazle Koelpin', 'williamson.meta@example.net', '2025-07-12 09:34:08', '$2y$12$hK3fEezZOk4wNftJ.IjrWudnPNLYmM03gz4yBqbk11EEubHOaMZ2i', NULL, NULL, NULL, 'ypND842kbl', '2025-07-12 09:34:08', '2025-07-12 09:34:08', NULL, 'user'),
-(7, 'Raymundo Casper MD', 'vallie.treutel@example.net', '2025-07-12 09:34:08', '$2y$12$hK3fEezZOk4wNftJ.IjrWudnPNLYmM03gz4yBqbk11EEubHOaMZ2i', NULL, NULL, NULL, 'sINR7YtAVt', '2025-07-12 09:34:08', '2025-07-12 09:34:08', NULL, 'user'),
-(8, 'Stacey Emard', 'jkris@example.org', '2025-07-12 09:34:08', '$2y$12$hK3fEezZOk4wNftJ.IjrWudnPNLYmM03gz4yBqbk11EEubHOaMZ2i', NULL, NULL, NULL, 'KwhSnjrxz1', '2025-07-12 09:34:08', '2025-07-12 09:34:08', NULL, 'user'),
-(9, 'Dr. Gabe Littel Sr.', 'lily52@example.com', '2025-07-12 09:34:08', '$2y$12$hK3fEezZOk4wNftJ.IjrWudnPNLYmM03gz4yBqbk11EEubHOaMZ2i', NULL, NULL, NULL, 'pqr14dM0uR', '2025-07-12 09:34:08', '2025-07-12 09:34:08', NULL, 'user'),
-(10, 'Clarissa Carroll', 'larson.dina@example.com', '2025-07-12 09:34:08', '$2y$12$hK3fEezZOk4wNftJ.IjrWudnPNLYmM03gz4yBqbk11EEubHOaMZ2i', NULL, NULL, NULL, 'R7OPNzQoBt', '2025-07-12 09:34:08', '2025-07-12 09:34:08', NULL, 'user'),
-(11, 'Denny', 'dennyherfansya10@gmail.com', '2025-07-12 09:34:08', '$2y$12$FB1fTmttgu/WuXKHL/RXmeA08RABY.zCuWLye0vPJI0rD2SCgGPDu', NULL, NULL, NULL, 'T9Qf5naCqZtFvV3Zqj75URCrSDUBwkO0tfQ75HCZnggWLCUqvAXa14d4lllK', '2025-07-12 09:34:08', '2025-07-12 09:34:08', NULL, 'user'),
-(12, 'Dega', 'dedut@gmail.com', NULL, '$2y$12$M5yw6TXYTGqc2Elh4rMHUuQ5.FARAjRqyXxxCsbq1RMCdZmUkegim', NULL, NULL, NULL, NULL, '2025-07-13 03:37:52', '2025-07-13 03:49:23', '02121', 'staff');
+-- ----------------------------
+-- Table structure for failed_jobs
+-- ----------------------------
+DROP TABLE IF EXISTS `failed_jobs`;
+CREATE TABLE `failed_jobs`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `failed_jobs_uuid_unique`(`uuid` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
---
--- Indexes for dumped tables
---
+-- ----------------------------
+-- Records of failed_jobs
+-- ----------------------------
 
---
--- Indexes for table `cache`
---
-ALTER TABLE `cache`
-  ADD PRIMARY KEY (`key`);
+-- ----------------------------
+-- Table structure for job_batches
+-- ----------------------------
+DROP TABLE IF EXISTS `job_batches`;
+CREATE TABLE `job_batches`  (
+  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `total_jobs` int NOT NULL,
+  `pending_jobs` int NOT NULL,
+  `failed_jobs` int NOT NULL,
+  `failed_job_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `options` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `cancelled_at` int NULL DEFAULT NULL,
+  `created_at` int NOT NULL,
+  `finished_at` int NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
---
--- Indexes for table `cache_locks`
---
-ALTER TABLE `cache_locks`
-  ADD PRIMARY KEY (`key`);
+-- ----------------------------
+-- Records of job_batches
+-- ----------------------------
 
---
--- Indexes for table `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+-- ----------------------------
+-- Table structure for jobs
+-- ----------------------------
+DROP TABLE IF EXISTS `jobs`;
+CREATE TABLE `jobs`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `queue` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `attempts` tinyint UNSIGNED NOT NULL,
+  `reserved_at` int UNSIGNED NULL DEFAULT NULL,
+  `available_at` int UNSIGNED NOT NULL,
+  `created_at` int UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `jobs_queue_index`(`queue` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
---
--- Indexes for table `jobs`
---
-ALTER TABLE `jobs`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `jobs_queue_index` (`queue`);
+-- ----------------------------
+-- Records of jobs
+-- ----------------------------
 
---
--- Indexes for table `job_batches`
---
-ALTER TABLE `job_batches`
-  ADD PRIMARY KEY (`id`);
+-- ----------------------------
+-- Table structure for migrations
+-- ----------------------------
+DROP TABLE IF EXISTS `migrations`;
+CREATE TABLE `migrations`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
---
--- Indexes for table `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
+-- ----------------------------
+-- Records of migrations
+-- ----------------------------
+INSERT INTO `migrations` VALUES (1, '0001_01_01_000000_create_users_table', 1);
+INSERT INTO `migrations` VALUES (2, '0001_01_01_000001_create_cache_table', 1);
+INSERT INTO `migrations` VALUES (3, '0001_01_01_000002_create_jobs_table', 1);
+INSERT INTO `migrations` VALUES (4, '2025_07_12_155849_add_two_factor_columns_to_users_table', 1);
+INSERT INTO `migrations` VALUES (5, '2025_07_12_161300_add_phone_role_at_users', 1);
+INSERT INTO `migrations` VALUES (6, '2025_07_14_065016_add_some_field_to_users', 1);
+INSERT INTO `migrations` VALUES (7, '2025_07_14_071623_create_personal_access_tokens_table', 1);
+INSERT INTO `migrations` VALUES (8, '2025_07_17_030432_create_companies_table', 1);
 
---
--- Indexes for table `password_reset_tokens`
---
-ALTER TABLE `password_reset_tokens`
-  ADD PRIMARY KEY (`email`);
+-- ----------------------------
+-- Table structure for password_reset_tokens
+-- ----------------------------
+DROP TABLE IF EXISTS `password_reset_tokens`;
+CREATE TABLE `password_reset_tokens`  (
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`email`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
---
--- Indexes for table `sessions`
---
-ALTER TABLE `sessions`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `sessions_user_id_index` (`user_id`),
-  ADD KEY `sessions_last_activity_index` (`last_activity`);
+-- ----------------------------
+-- Records of password_reset_tokens
+-- ----------------------------
 
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
+-- ----------------------------
+-- Table structure for personal_access_tokens
+-- ----------------------------
+DROP TABLE IF EXISTS `personal_access_tokens`;
+CREATE TABLE `personal_access_tokens`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint UNSIGNED NOT NULL,
+  `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `personal_access_tokens_token_unique`(`token` ASC) USING BTREE,
+  INDEX `personal_access_tokens_tokenable_type_tokenable_id_index`(`tokenable_type` ASC, `tokenable_id` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
---
--- AUTO_INCREMENT for dumped tables
---
+-- ----------------------------
+-- Records of personal_access_tokens
+-- ----------------------------
 
---
--- AUTO_INCREMENT for table `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+-- ----------------------------
+-- Table structure for sessions
+-- ----------------------------
+DROP TABLE IF EXISTS `sessions`;
+CREATE TABLE `sessions`  (
+  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint UNSIGNED NULL DEFAULT NULL,
+  `ip_address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `user_agent` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_activity` int NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `sessions_user_id_index`(`user_id` ASC) USING BTREE,
+  INDEX `sessions_last_activity_index`(`last_activity` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
---
--- AUTO_INCREMENT for table `jobs`
---
-ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+-- ----------------------------
+-- Records of sessions
+-- ----------------------------
+INSERT INTO `sessions` VALUES ('iVKCId8REQ79wnExQzj0OGeDoYIiwV0VyrrlhV0p', 11, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUWRyRGJtN1lsSjVzSzk2V3RQMnFyQ1VocjVpa0w5UFJCZ2N1VE5zcyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jb21wYW5pZXMvMSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjExO30=', 1752736400);
 
---
--- AUTO_INCREMENT for table `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+-- ----------------------------
+-- Table structure for users
+-- ----------------------------
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `two_factor_secret` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `two_factor_recovery_codes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `two_factor_confirmed_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `role` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
+  `position` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `department` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `face_embedding` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  `img_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `users_email_unique`(`email` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-COMMIT;
+-- ----------------------------
+-- Records of users
+-- ----------------------------
+INSERT INTO `users` VALUES (1, 'Prof. Raegan Hudson', 'rmurazik@example.org', '2025-07-17 06:41:09', '$2y$12$02nb6oHrsVZNz/V5JhwBAe3V6Fxr5wpIDQ7TAA9Xe32UDYz7PPp0K', NULL, NULL, NULL, 'HqmYda9ZpV', '2025-07-17 06:41:09', '2025-07-17 06:41:09', NULL, 'user', NULL, NULL, NULL, NULL);
+INSERT INTO `users` VALUES (2, 'Eulah Bode', 'moses.heathcote@example.com', '2025-07-17 06:41:09', '$2y$12$02nb6oHrsVZNz/V5JhwBAe3V6Fxr5wpIDQ7TAA9Xe32UDYz7PPp0K', NULL, NULL, NULL, 'gegTe14bWJ', '2025-07-17 06:41:09', '2025-07-17 06:41:09', NULL, 'user', NULL, NULL, NULL, NULL);
+INSERT INTO `users` VALUES (3, 'Mr. Cole Hammes DDS', 'greilly@example.com', '2025-07-17 06:41:09', '$2y$12$02nb6oHrsVZNz/V5JhwBAe3V6Fxr5wpIDQ7TAA9Xe32UDYz7PPp0K', NULL, NULL, NULL, 'XcDnNcYlwi', '2025-07-17 06:41:09', '2025-07-17 06:41:09', NULL, 'user', NULL, NULL, NULL, NULL);
+INSERT INTO `users` VALUES (4, 'Ted Rosenbaum DVM', 'ruthie.rippin@example.net', '2025-07-17 06:41:09', '$2y$12$02nb6oHrsVZNz/V5JhwBAe3V6Fxr5wpIDQ7TAA9Xe32UDYz7PPp0K', NULL, NULL, NULL, 'dIR30q5aFW', '2025-07-17 06:41:09', '2025-07-17 06:41:09', NULL, 'user', NULL, NULL, NULL, NULL);
+INSERT INTO `users` VALUES (5, 'Callie Oberbrunner', 'makenna91@example.com', '2025-07-17 06:41:09', '$2y$12$02nb6oHrsVZNz/V5JhwBAe3V6Fxr5wpIDQ7TAA9Xe32UDYz7PPp0K', NULL, NULL, NULL, 'ESfLXATRs5', '2025-07-17 06:41:09', '2025-07-17 06:41:09', NULL, 'user', NULL, NULL, NULL, NULL);
+INSERT INTO `users` VALUES (6, 'Estefania Watsica', 'ndeckow@example.org', '2025-07-17 06:41:09', '$2y$12$02nb6oHrsVZNz/V5JhwBAe3V6Fxr5wpIDQ7TAA9Xe32UDYz7PPp0K', NULL, NULL, NULL, 'qHjVfnWQ8q', '2025-07-17 06:41:09', '2025-07-17 06:41:09', NULL, 'user', NULL, NULL, NULL, NULL);
+INSERT INTO `users` VALUES (7, 'Randi Morissette Jr.', 'stella86@example.org', '2025-07-17 06:41:09', '$2y$12$02nb6oHrsVZNz/V5JhwBAe3V6Fxr5wpIDQ7TAA9Xe32UDYz7PPp0K', NULL, NULL, NULL, 'trw5XVCaJg', '2025-07-17 06:41:09', '2025-07-17 06:41:09', NULL, 'user', NULL, NULL, NULL, NULL);
+INSERT INTO `users` VALUES (8, 'Eldon Nikolaus III', 'hoeger.maribel@example.com', '2025-07-17 06:41:09', '$2y$12$02nb6oHrsVZNz/V5JhwBAe3V6Fxr5wpIDQ7TAA9Xe32UDYz7PPp0K', NULL, NULL, NULL, 'xuYauxdYuq', '2025-07-17 06:41:09', '2025-07-17 06:41:09', NULL, 'user', NULL, NULL, NULL, NULL);
+INSERT INTO `users` VALUES (9, 'Ms. Rosemarie Reichel', 'ifisher@example.com', '2025-07-17 06:41:09', '$2y$12$02nb6oHrsVZNz/V5JhwBAe3V6Fxr5wpIDQ7TAA9Xe32UDYz7PPp0K', NULL, NULL, NULL, 'WHMD8x0XJe', '2025-07-17 06:41:09', '2025-07-17 06:41:09', NULL, 'user', NULL, NULL, NULL, NULL);
+INSERT INTO `users` VALUES (10, 'Antwan Spinka', 'bernard40@example.com', '2025-07-17 06:41:09', '$2y$12$02nb6oHrsVZNz/V5JhwBAe3V6Fxr5wpIDQ7TAA9Xe32UDYz7PPp0K', NULL, NULL, NULL, 'xDPQEeCFfU', '2025-07-17 06:41:09', '2025-07-17 06:41:09', NULL, 'user', NULL, NULL, NULL, NULL);
+INSERT INTO `users` VALUES (11, 'Denny', 'dennyherfansya10@gmail.com', '2025-07-17 06:41:09', '$2y$12$EpCLCP7HSuBoZHwbAY2rTOrjtAmGEhkEqwTKayJsqUEOBtEuuqs4G', NULL, NULL, NULL, 'SFc3Ci2VA1', '2025-07-17 06:41:09', '2025-07-17 07:13:04', '021', 'admin', 'Apps Developer', 'IT', NULL, NULL);
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+SET FOREIGN_KEY_CHECKS = 1;
