@@ -19,7 +19,7 @@ return new class extends Migration
             //face_embedding
             $table->text('face_embedding')->nullable();
             //img_url
-            $table->string('img_url')->nullable();
+            $table->string('image_url')->nullable();
         });
     }
 
