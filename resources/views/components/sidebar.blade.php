@@ -23,5 +23,9 @@
                 <a href="{{ route('attendances.index') }}"
                     class="nav-link"><i class="fas fa-clipboard"></i> <span>Attendances</span></a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('permissions.index') }}"
+                    class="nav-link"><i class="fas fa-pen-to-square"></i> <span>Permission</span></a>
+            </li>
     </aside>
 </div>
