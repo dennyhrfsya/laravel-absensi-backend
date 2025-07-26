@@ -12,11 +12,42 @@ class PermissionController extends Controller
     {
         $permissions = Permission::with('user')
             ->when($request->input('name'), function ($query, $name) {
-               $query->whereHas('user', function ($query) use ($name) {
+                $query->whereHas('user', function ($query) use ($name) {
                     $query->where('name', 'like', '%' . $name . '%');
                 });
-            })->orderBy('user_id', 'asc')->paginate(10);
+            })->orderBy('id', 'desc')->paginate(10);
         return view('pages.permission.index', compact('permissions'));
 
+    }
+
+    //view
+    public function show($id)
+    {
+        $permission = Permission::with('user')->find($id);
+        return view('pages.permission.show', compact('permission'));
+    }
+
+    //edit
+    public function edit($id)
+    {
+        $permission = Permission::find($id);
+        return view('pages.permission.edit', compact('permission'));
+    }
+
+    // update
+    public function update(Request $request, $id)
+    {
+        $permission = Permission::find($id);
+        $permission->is_approved = $request->input('is_approved');
+        $permission->save();
+        return redirect()->route('permissions.index')->with('success', 'Permission updated successfully');
+    }
+
+    //destroy
+    public function destroy($id)
+    {
+        $permission = Permission::findOrFail($id);
+        $permission->delete();
+        return redirect()->route('permissions.index')->with('success', 'Permission deleted successfully');
     }
 }
