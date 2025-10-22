@@ -22,7 +22,7 @@ class AttendanceController extends Controller
         $attendance->user_id = $request->user()->id;
         $attendance->date = date('Y-m-d');
         $attendance->time_in = date('H:i:s');
-        $attendance->latlong_in = $request->latitude . ',' . $request->longitude;
+        $attendance->latlon_in = $request->latitude . ',' . $request->longitude;
         $attendance->save();
 
         return response(['message' => 'Checkin success', 'attendance' => $attendance], 200);
@@ -48,7 +48,7 @@ class AttendanceController extends Controller
 
         //update attendance
         $attendance->time_out = date('H:i:s');
-        $attendance->latlong_out = $request->latitude . ',' . $request->longitude;
+        $attendance->latlon_out = $request->latitude . ',' . $request->longitude;
         $attendance->save();
 
         return response(['message' => 'Checkout success', 'attendance' => $attendance], 200);
@@ -62,8 +62,11 @@ class AttendanceController extends Controller
             ->where('date', date('Y-m-d'))
             ->first();
 
+        $IsCheckedout = $attendance ? $attendance->time_out : false;
+
         return response([
-            'checkedin' => $attendance ? true : false
+            'checkedin' => $attendance ? true : false,
+            'checkedout' => $IsCheckedout ? true : false,
         ], 200);
     }
 }
