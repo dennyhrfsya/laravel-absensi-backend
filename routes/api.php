@@ -36,3 +36,6 @@ Route::apiResource('/api-permissions', \App\Http\Controllers\Api\PermissionContr
 //notes
 //membuat route notes dengan apiResource(API Otomatic Resource)
 Route::apiResource('/api-notes', \App\Http\Controllers\Api\NoteController::class)->middleware('auth:sanctum');
+
+//update FCM token
+Route::post('/update-fcm-token', [\App\Http\Controllers\Api\AuthController::class, 'updateFcmToken'])->middleware('auth:sanctum');
